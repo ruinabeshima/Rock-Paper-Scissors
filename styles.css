@@ -38,7 +38,7 @@ h1 {
 }
 
 .human {
-  margin-top: 5rem; 
+  margin-top: 3rem; 
 }
 
 .human > button {
@@ -51,4 +51,16 @@ h1 {
 
 .human > button:hover {
   background-color: rgb(114, 111, 111); 
+}
+
+#score-announce {
+  border: 0.25rem solid black; 
+  height: 5rem; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+#announce-score-text, #human-score-count, #computer-score-count {
+  font-size: 40px; 
 }

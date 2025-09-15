@@ -54,10 +54,43 @@ function getChoicePicture(computerChoice){
 
 }
 
+function announceScores(result){
+  const ScoreAnnounceDelete = document.getElementById("announce-score-text")
+  if (ScoreAnnounceDelete) {
+    ScoreAnnounceDelete.remove()
+  }
+
+  let announceScoreText = document.createElement("p")
+  const announceScoreNode = document.createTextNode(result)
+  announceScoreText.appendChild(announceScoreNode)
+  announceScoreText.id = "announce-score-text"
+  scoreAnnounce.appendChild(announceScoreText)
+}
+
+function showScores(){
+  const humanScoreDelete = document.getElementById("human-score-count")
+  const computerScoreDelete = document.getElementById("computer-score-count")
+  if (humanScoreDelete){
+    humanScoreDelete.remove()
+  }
+  if (computerScoreDelete){
+    computerScoreDelete.remove()
+  }
+
+  let humanScoreCount = document.createElement("p")
+  let computerScoreCount = document.createElement("p")
+  const humanNode = document.createTextNode(humanScore)
+  const computerNode = document.createTextNode(computerScore)
+  humanScoreCount.id = "human-score-count"
+  computerScoreCount.id = "computer-score-count"
+  humanScoreCount.appendChild(humanNode)
+  computerScoreCount.appendChild(computerNode)
+  humanScoreBoard.appendChild(humanScoreCount)
+  computerScoreBoard.appendChild(computerScoreCount)
+}
+
 function playRound(humanChoice, computerChoice){
     let result = ""
-    let computerScore = 0
-    let humanScore = 0
     if (humanChoice == computerChoice){
       result = "It was a draw! No points gained!";
     } else if (humanChoice == "ROCK" && computerChoice == "SCISSORS"){
@@ -85,14 +118,34 @@ function playRound(humanChoice, computerChoice){
 function playGame(humanChoice){
   let computerChoice = getComputerChoice()
   getChoicePicture(computerChoice)
-  value = playRound(humanChoice, computerChoice)
-  console.log(value)
+  let value = playRound(humanChoice, computerChoice)
+  showScores()
+  announceScores(value)
+
+  if (computerScore == 5) {
+    alert("Computer reached 5 points first and wins!")
+    computerScore = 0 
+    humanScore = 0 
+    showScores()
+    announceScores("You lost! Play again?")
+  } else if (humanScore == 5) {
+    alert ("You reached 5 points first and you win!")
+    computerScore = 0 
+    humanScore = 0 
+    showScores()
+    announceScores("You won! Play again?")
+  }
 }
 
 const humanRock = document.getElementById("human-rock")
 const humanPaper = document.getElementById("human-paper")
 const humanScissors = document.getElementById("human-scissors")
 const computerImage = document.getElementById("computer-choice")
+const computerScoreBoard = document.getElementById("computer-scoreboard")
+const humanScoreBoard = document.getElementById("human-scoreboard")
+const scoreAnnounce = document.getElementById("score-announce")
+let computerScore = 0 
+let humanScore = 0 
+
 
 getHumanChoice()
-playGame()
