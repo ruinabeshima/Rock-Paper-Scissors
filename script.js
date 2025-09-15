@@ -25,6 +25,35 @@ function getHumanChoice(){
   })
 };
 
+function getChoicePicture(computerChoice){
+  const firstImg = computerImage.querySelector("img")
+  if (firstImg) {
+    firstImg.remove()
+  }
+
+  if (computerChoice === "ROCK"){
+    let rockImage = document.createElement("img")
+    rockImage.src = "resources/rock.jpg"
+    rockImage.classList.add("choice-image")
+    computerImage.appendChild(rockImage)
+  } 
+  
+  else if (computerChoice === "PAPER"){
+    let paperImage = document.createElement("img")
+    paperImage.src = "resources/paper.jpg"
+    paperImage.classList.add("choice-image")
+    computerImage.appendChild(paperImage)
+  } 
+  
+  else if (computerChoice === "SCISSORS"){
+    let scissorImage = document.createElement("img")
+    scissorImage.src = "resources/scissors.jpg"
+    scissorImage.classList.add("choice-image")
+    computerImage.appendChild(scissorImage)
+  }
+
+}
+
 function playRound(humanChoice, computerChoice){
     let result = ""
     let computerScore = 0
@@ -55,6 +84,7 @@ function playRound(humanChoice, computerChoice){
 
 function playGame(humanChoice){
   let computerChoice = getComputerChoice()
+  getChoicePicture(computerChoice)
   value = playRound(humanChoice, computerChoice)
   console.log(value)
 }
@@ -62,6 +92,7 @@ function playGame(humanChoice){
 const humanRock = document.getElementById("human-rock")
 const humanPaper = document.getElementById("human-paper")
 const humanScissors = document.getElementById("human-scissors")
+const computerImage = document.getElementById("computer-choice")
 
 getHumanChoice()
 playGame()
