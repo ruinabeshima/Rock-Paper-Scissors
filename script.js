@@ -2,32 +2,33 @@ function getComputerChoice() {
   let RandNum = Math.floor(Math.random() * 3);
   let value = "" 
   if (RandNum == 0){
-    value = "Rock";
+    value = "ROCK";
   }
   else if (RandNum == 1){
-    value = "Scissors";
+    value = "SCISSORS";
   }
   else if (RandNum == 2){
-    value = "Paper";
+    value = "PAPER";
   }
   return value; 
 };
 
 function getHumanChoice(){
-  let Choice = prompt("Enter a choice between Rock, Paper, Scissors: ")
-  return Choice
+  humanRock.addEventListener("click", () => {
+    playGame("ROCK")
+  })
+  humanPaper.addEventListener("click", () => {
+    playGame("PAPER")
+  })
+  humanScissors.addEventListener("click", () => {
+    playGame("SCISSORS")
+  })
 };
 
-
-function playGame(){
-
-  let humanScore = 0;
-  let computerScore = 0;  
-  
-  function playRound(humanChoice, computerChoice){
-    humanChoice = humanChoice.toUpperCase();
-    computerChoice = computerChoice.toUpperCase();
+function playRound(humanChoice, computerChoice){
     let result = ""
+    let computerScore = 0
+    let humanScore = 0
     if (humanChoice == computerChoice){
       result = "It was a draw! No points gained!";
     } else if (humanChoice == "ROCK" && computerChoice == "SCISSORS"){
@@ -52,10 +53,15 @@ function playGame(){
     return result
   };
 
-  for (let i=0; i<5; i++){
-    console.log(playRound(getHumanChoice(), getComputerChoice()))
-  }
-
+function playGame(humanChoice){
+  let computerChoice = getComputerChoice()
+  value = playRound(humanChoice, computerChoice)
+  console.log(value)
 }
 
+const humanRock = document.getElementById("human-rock")
+const humanPaper = document.getElementById("human-paper")
+const humanScissors = document.getElementById("human-scissors")
+
+getHumanChoice()
 playGame()
